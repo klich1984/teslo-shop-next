@@ -16,7 +16,7 @@ export const titleFont = Montserrat_Alternates({
   weight: ['500', '700'],
 })
 
-export const releway = Raleway({
+export const ralewayFont = Raleway({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 })
