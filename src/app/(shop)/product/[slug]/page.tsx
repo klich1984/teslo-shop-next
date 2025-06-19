@@ -1,4 +1,4 @@
-import { QuantitySelector, SizeSelector } from '@/components'
+import { ProductSlidesshow, QuantitySelector, SizeSelector } from '@/components'
 import { titleFont } from '@/config/fonts'
 import { initialData } from '@/seed/seed'
 import { notFound } from 'next/navigation'
@@ -21,7 +21,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
   return (
     <div className='mt-5 mb-20 grid md:grid-cols-3 gap-3'>
       {/* Slideshow */}
-      <div className='col-span-1 md:col-span-2'>Hola Mundo</div>
+      <div className='col-span-1 md:col-span-2'>
+        <ProductSlidesshow title={product.title} images={product.images} />
+      </div>
       {/* Detalles */}
       <div className='col-span-1 px-5'>
         <h1 className={`${titleFont.className} antialiased font-bold text-xl`}>
