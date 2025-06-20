@@ -2,6 +2,7 @@ import { QuantitySelector, Title } from '@/components'
 import { initialData } from '@/seed/seed'
 import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 const productInCart = [
   initialData.products[0],
@@ -10,6 +11,10 @@ const productInCart = [
 ]
 
 export default function CartPage() {
+  if (productInCart.length === 0) {
+    redirect('/empty')
+  }
+
   return (
     <div className='flex justify-center items-center mb-72 px-10 sm:px-0'>
       <div className='flex flex-col w-[1000px]'>
@@ -24,7 +29,7 @@ export default function CartPage() {
             </Link>
 
             {/* Items */}
-            {productInCart.map((product) => (
+            {productInCart?.map((product) => (
               <div className='flex mb-5' key={product.slug}>
                 <Image
                   alt={product.title}
