@@ -1,4 +1,5 @@
 import { prisma } from '../lib/prisma'
+import { initialData } from './seed';
 
 const main = async () => {
   // Borrar registros previos de la base de datos
@@ -8,6 +9,27 @@ const main = async () => {
     prisma.category.deleteMany(),
   ])
 
+  // Crear categorias
+  // await prisma.category.create({
+  //   data: {
+  //     name: 'Shirts'
+  //   }
+  // })
+  // objeto como lo necesito
+  // {
+  //   name: 'Shirt'
+  // }
+  const { categories } = initialData
+
+  const categoriesData = categories?.map((category) => ({
+    name: category
+  }))
+  // const categoriesData = categories?.map((name) => ({ name }))
+  await prisma.category.createMany({
+    data: categoriesData
+  })
+
+  console.log('👽 categories', categoriesData)
   console.log('👽 Seed ejecutandose correctamente')
 }
 
