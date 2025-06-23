@@ -1,5 +1,5 @@
 import { prisma } from '../lib/prisma'
-import { initialData } from './seed';
+import { initialData } from './seed'
 
 const main = async () => {
   // Borrar registros previos de la base de datos
@@ -19,17 +19,48 @@ const main = async () => {
   // {
   //   name: 'Shirt'
   // }
-  const { categories } = initialData
+  const { categories, products } = initialData
 
   const categoriesData = categories?.map((category) => ({
-    name: category
+    name: category,
   }))
   // const categoriesData = categories?.map((name) => ({ name }))
   await prisma.category.createMany({
-    data: categoriesData
+    data: categoriesData,
   })
 
-  console.log('👽 categories', categoriesData)
+  const categoriesDB = await prisma.category.findMany() // Obtengo todas las categorias de la base de datos
+
+  const categoriesMap = categoriesDB.reduce((map, category) => {
+    map[category.name.toLocaleLowerCase()] = category.id
+
+    return map
+  }, {} as Record<string, string>) //<string=shirt, categoryID=categoryID=>
+
+  // Crear productos
+  // Ejemplo de insertar un producto
+  // const { images, type, ...producto1 } = products[0] // Product1 contiene el resto de propiedades del producto, y las imagenes y el tipo de producto se eliminan
+
+  // await prisma.product.create({
+  //   data: {
+  //     ...producto1,
+  //     categoryId: categoriesMap['shirts'],
+  //   },
+  // })
+
+  products.forEach(async (product) => {
+    const { type, images, ...rest } = product
+
+    const dbProduct = await prisma.product.create({
+      data: {
+        ...rest,
+        categoryId: categoriesMap[type],
+      },
+    })
+  })
+
+  // Insertar Imagenes
+
   console.log('👽 Seed ejecutandose correctamente')
 }
 
