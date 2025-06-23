@@ -10,7 +10,8 @@ datasource db {
 
 enum Size {
   XS
-  SizeM
+  S
+  M
   L
   XL
   XXL
