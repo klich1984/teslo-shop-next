@@ -57,9 +57,17 @@ const main = async () => {
         categoryId: categoriesMap[type],
       },
     })
-  })
 
-  // Insertar Imagenes
+    // Insertar Imagenes
+    const imagesData = images?.map((image) => ({
+      url: image,
+      productId: dbProduct.id,
+    }))
+
+    await prisma.productImage.createMany({
+      data: imagesData,
+    })
+  })
 
   console.log('👽 Seed ejecutandose correctamente')
 }
