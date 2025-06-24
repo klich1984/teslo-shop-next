@@ -14,7 +14,7 @@ interface CategoryPageProps {
   }>
 }
 
-export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
+export default async function GenderPage({ params, searchParams }: CategoryPageProps) {
   const { gender } = await params
   const { page } = await searchParams
 
