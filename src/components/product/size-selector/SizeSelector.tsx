@@ -2,11 +2,16 @@ import type { Size } from '@/interfaces'
 import clsx from 'clsx'
 
 interface SizeSelectorProps {
-  selectedSize: Size
+  selectedSize?: Size
   availableSizes: Size[]
+  onSizeChanged: (size: Size) => void
 }
 
-export const SizeSelector = ({ availableSizes, selectedSize }: SizeSelectorProps) => {
+export const SizeSelector = ({
+  availableSizes,
+  selectedSize,
+  onSizeChanged,
+}: SizeSelectorProps) => {
   return (
     <div className='my-5'>
       <h3 className='font-bold mb-4'>Tallas disponibles</h3>
@@ -15,6 +20,7 @@ export const SizeSelector = ({ availableSizes, selectedSize }: SizeSelectorProps
         {availableSizes.map((size) => (
           <button
             key={size}
+            onClick={() => onSizeChanged(size)}
             className={clsx('mx-2 hover:underline text-lg cursor-pointer', {
               underline: size === selectedSize,
             })}
