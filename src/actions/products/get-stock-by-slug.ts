@@ -13,8 +13,6 @@ export const getStockBySlug = async (slug: string): Promise<number> => {
       },
     })
 
-    console.log('10👽 ~ getStockBySlug ~ product:', stock)
-
     return stock?.inStock ?? 0
   } catch (error) {
     console.log('👽', error)
