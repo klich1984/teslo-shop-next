@@ -8,8 +8,9 @@ import { QuantitySelector } from '@/components'
 import Link from 'next/link'
 
 export const ProductsInCart = () => {
-  const { updateProductQuantity } = useCartStore()
   const [loaded, setLoaded] = useState(false)
+
+  const { updateProductQuantity, removeProduct } = useCartStore()
   const productInCart = useCartStore((state) => state.cart)
 
   useEffect(() => {
@@ -49,7 +50,12 @@ export const ProductsInCart = () => {
               onQuantityChanged={(quantity) => updateProductQuantity(product, quantity)}
             />
 
-            <button className='mt-3 underline'>Remover</button>
+            <button
+              className='mt-3 underline cursor-pointer'
+              onClick={() => removeProduct(product)}
+            >
+              Remover
+            </button>
           </div>
         </div>
       ))}
