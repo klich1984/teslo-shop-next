@@ -1,19 +1,13 @@
-import { QuantitySelector, Title } from '@/components'
-import { initialData } from '@/seed/seed'
-import Image from 'next/image'
-import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { Title } from '@/components'
 
-const productInCart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-]
+import Link from 'next/link'
+import { ProductsInCart } from './ui/ProductsInCart'
+// import { redirect } from 'next/navigation'
 
 export default function CartPage() {
-  if (productInCart.length === 0) {
-    redirect('/empty')
-  }
+  // if (productInCart.length === 0) {
+  //   redirect('/empty')
+  // }
 
   return (
     <div className='flex justify-center items-center mb-72 px-10 sm:px-0'>
@@ -29,29 +23,7 @@ export default function CartPage() {
             </Link>
 
             {/* Items */}
-            {productInCart?.map((product) => (
-              <div className='flex mb-5' key={product.slug}>
-                <Image
-                  alt={product.title}
-                  className='mr-5 rounded'
-                  src={`/products/${product.images[0]}`}
-                  height={100}
-                  width={100}
-                  style={{
-                    width: '100px',
-                    height: '100px',
-                  }}
-                />
-
-                <div>
-                  <p>{product.title}</p>
-                  <p>{product.price}</p>
-                  <QuantitySelector quantity={3} />
-
-                  <button className='mt-3 underline'>Remover</button>
-                </div>
-              </div>
-            ))}
+            <ProductsInCart />
           </div>
 
           {/* checkout | Resumen de la compra */}
