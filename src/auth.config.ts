@@ -1,5 +1,4 @@
-import NextAuth from 'next-auth'
-import type { NextAuthConfig } from 'next-auth'
+import NextAuth, { type NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import { z } from 'zod'
 
@@ -19,7 +18,7 @@ export const authConfig: NextAuthConfig = {
 
         const { email, password } = parsedCredentials.data
 
-        console.log('👽 ~ authorize ~ password:', { password, email })
+        console.log('23👽 ~ authorize ~ password:', { password, email })
 
         // Buscar el correo
 
