@@ -3,11 +3,16 @@ import { initialData } from './seed'
 
 const main = async () => {
   // Borrar registros previos de la base de datos
-  await Promise.all([
-    prisma.productImage.deleteMany(),
-    prisma.product.deleteMany(),
-    prisma.category.deleteMany(),
-  ])
+  // await Promise.all([
+  //   prisma.user.deleteMany(), // Verificar que no tengamos relaciones para el orden del borrado
+  //   prisma.productImage.deleteMany(),
+  //   prisma.product.deleteMany(),
+  //   prisma.category.deleteMany(),
+  // ])
+  await prisma.user.deleteMany() // Verificar que no tengamos relaciones para el orden del borrado
+  await prisma.productImage.deleteMany()
+  await prisma.product.deleteMany()
+  await prisma.category.deleteMany()
 
   // Crear categorias
   // await prisma.category.create({
@@ -19,7 +24,11 @@ const main = async () => {
   // {
   //   name: 'Shirt'
   // }
-  const { categories, products } = initialData
+  const { categories, products, users } = initialData
+
+  await prisma.user.createMany({
+    data: users,
+  })
 
   const categoriesData = categories?.map((category) => ({
     name: category,
