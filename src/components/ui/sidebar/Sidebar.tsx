@@ -11,12 +11,18 @@ import {
   IoTicketOutline,
 } from 'react-icons/io5'
 
+import { useSession } from 'next-auth/react'
+
 import { useUIStore } from '@/store'
 import clsx from 'clsx'
 import { logout } from '@/actions'
 
 export const Sidebar = () => {
   const { isSideMenuOpen, closeSideMenu } = useUIStore()
+
+  const { data: session } = useSession()
+
+  // console.log('👽 ~ Sidebar ~ session:', session)
 
   return (
     <div>
