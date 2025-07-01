@@ -13,7 +13,7 @@ export async function authenticate(prevState: string | undefined, formData: Form
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
-          return '15👽 Invalid credentials.'
+          return '15👽 CredentialsSignin.'
         default:
           return '17👽 Something went wrong.'
       }
