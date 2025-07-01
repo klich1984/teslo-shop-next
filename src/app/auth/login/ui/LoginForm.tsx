@@ -4,6 +4,8 @@ import React, { useActionState } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { authenticate } from '@/actions'
+import { IoInformationCircleOutline } from 'react-icons/io5'
+import clsx from 'clsx'
 
 export const LoginForm = () => {
   const searchParams = useSearchParams()
@@ -31,7 +33,21 @@ export const LoginForm = () => {
           id='password'
         />
 
-        <button type='submit' className='btn-primary'>
+        {errorMessage && (
+          <div className='flex justify-center items-center mb-2'>
+            <IoInformationCircleOutline className='h-6 w-6 text-red-500 mr-3' />
+            <p className='text-sm text-red-500'>Las Credenciales no son correctas</p>
+          </div>
+        )}
+
+        <button
+          type='submit'
+          className={clsx({
+            'btn-primary': !isPending,
+            'btn-disabled': isPending,
+          })}
+          disabled={isPending}
+        >
           Ingresar
         </button>
 
