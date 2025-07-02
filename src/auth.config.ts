@@ -9,6 +9,23 @@ export const authConfig: NextAuthConfig = {
     signIn: '/auth/login',
     newUser: '/auth/new-account',
   },
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        token.data = user
+      }
+
+      return token
+    },
+
+    session({ session, token }) {
+      console.log('👽 ~ session ~ session:', { session, token })
+      session.user = token.data as any
+
+      return session
+    },
+  },
+
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -34,7 +51,7 @@ export const authConfig: NextAuthConfig = {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user // Se saca el pasword para no ser enviado.
 
-        console.log('👽 ~ authorize ~ rest:', rest)
+        // console.log('👽 ~ authorize ~ rest:', rest)
 
         return rest
       },
