@@ -1,7 +1,10 @@
 'use client'
 
+import { login, registerUser } from '@/actions'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 import { useForm, SubmitHandler } from 'react-hook-form'
 
@@ -14,6 +17,10 @@ interface FormInputs {
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
 export const RegisterForm = () => {
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -21,12 +28,22 @@ export const RegisterForm = () => {
   } = useForm<FormInputs>()
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    setErrorMessage('')
     const { email, name, password } = data
 
-    console.log(
-      '👽 ~ constonSubmit:SubmitHandler<FormInputs>= ~ email, name, password:',
-      { email, name, password, data }
-    )
+    // Server action
+    const res = await registerUser(name, email, password)
+
+    // errror
+    if (!res.ok) {
+      setErrorMessage(res.message)
+
+      return
+    }
+
+    await login(email.toLowerCase(), password)
+
+    router.replace('/')
   }
 
   return (
@@ -62,6 +79,8 @@ export const RegisterForm = () => {
         type='password'
         {...register('password', { required: true, minLength: 6 })}
       />
+
+      {errorMessage && <span className='text-red-500'>{errorMessage}</span>}
 
       <button className='btn-primary'>Crear cuenta</button>
 
