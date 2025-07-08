@@ -85,13 +85,14 @@ model Country {
 }
 
 model UserAddress {
-  id              String @id @default(uuid())
-  firstName       String
-  lastName        String
-  address         String
-  address2        String
-  postalCode      String
-  postalCodephone String
+  id         String @id @default(uuid())
+  firstName  String
+  lastName   String
+  address    String
+  address2   String
+  phone      String
+  postalCode String
+  city       String @default("")
 
   // Relaciones
   // 1 a muchos
