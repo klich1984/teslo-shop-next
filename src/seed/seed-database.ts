@@ -10,6 +10,10 @@ const main = async () => {
   //   prisma.product.deleteMany(),
   //   prisma.category.deleteMany(),
   // ])
+  await prisma.orderAddress.deleteMany()
+  await prisma.orderItem.deleteMany()
+  await prisma.order.deleteMany()
+
   await prisma.userAddress.deleteMany()
   await prisma.user.deleteMany() // Verificar que no tengamos relaciones para el orden del borrado
   await prisma.productImage.deleteMany()
