@@ -1,5 +1,4 @@
 import { Title } from '@/components'
-import Link from 'next/link'
 import { ProductsInChecout } from './ui/ProductsInCheckout'
 import { PlaceOrder } from './ui/PlaceOrder'
 
@@ -12,17 +11,14 @@ export default function CheckoutPage() {
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-10'>
           {/* Carrito */}
           <div className='flex flex-col mt-5'>
-            <span className='text-xl'>Ajustar elementos</span>
-            <Link href={'/cart'} className='underline mb-5'>
-              Editar carrito
-            </Link>
-
             {/* Items */}
             <ProductsInChecout />
           </div>
 
           {/* checkout | Resumen de la compra */}
-          <PlaceOrder />
+          <div className='flex flex-col mt-5'>
+            <PlaceOrder />
+          </div>
         </div>
       </div>
     </div>

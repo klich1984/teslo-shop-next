@@ -5,21 +5,30 @@ import Image from 'next/image'
 
 import { useCartStore } from '@/store'
 import { currencyFormat } from '@/utils'
+import Link from 'next/link'
 
 export const ProductsInChecout = () => {
   const [loaded, setLoaded] = useState(false)
   const productInCart = useCartStore((state) => state.cart)
+  const { cart } = useCartStore()
 
   useEffect(() => {
     setLoaded(true)
   }, [])
 
   if (!loaded) {
-    return <p>Loading...</p>
+    return <p>Cargando...</p>
   }
+
+  if (!cart.length) return <></>
 
   return (
     <>
+      <span className='text-xl'>Ajustar elementos</span>
+      <Link href={'/cart'} className='underline mb-5'>
+        Editar carrito
+      </Link>
+
       {productInCart?.map((product) => (
         <div className='flex mb-5' key={`${product.slug}-${product.size}`}>
           <Image

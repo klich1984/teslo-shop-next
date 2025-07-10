@@ -4,6 +4,7 @@ import { placeOrder } from '@/actions'
 import { useAddressStore, useCartStore } from '@/store'
 import { currencyFormat } from '@/utils'
 import clsx from 'clsx'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -22,6 +23,7 @@ export const PlaceOrder = () => {
   const { address } = useAddressStore()
 
   const { cart, getSummaryInformation, clearCart } = useCartStore()
+
   const { itemsInCart, subTotal, tax, total } = getSummaryInformation()
 
   const onPlaceOrder = async () => {
@@ -48,6 +50,16 @@ export const PlaceOrder = () => {
   }
 
   if (!loaded) return <p>Cargando...</p>
+
+  if (!cart.length)
+    return (
+      <div>
+        <p>No hay productos que revisar</p>
+        <Link className='flex btn-primary justify-center font-semibold mt-2' href={'/'}>
+          Regresa a al tienda
+        </Link>
+      </div>
+    )
 
   return (
     <div className='bg-white rounded-xl shadow-xl p-7'>
