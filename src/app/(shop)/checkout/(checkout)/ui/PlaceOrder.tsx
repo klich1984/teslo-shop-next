@@ -4,11 +4,15 @@ import { placeOrder } from '@/actions'
 import { useAddressStore, useCartStore } from '@/store'
 import { currencyFormat } from '@/utils'
 import clsx from 'clsx'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export const PlaceOrder = () => {
   const [loaded, setLoaded] = useState(false)
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const router = useRouter()
 
   useEffect(() => {
     // Sincronizar el cliente y el servidor
@@ -17,7 +21,7 @@ export const PlaceOrder = () => {
 
   const { address } = useAddressStore()
 
-  const { cart, getSummaryInformation } = useCartStore()
+  const { cart, getSummaryInformation, clearCart } = useCartStore()
   const { itemsInCart, subTotal, tax, total } = getSummaryInformation()
 
   const onPlaceOrder = async () => {
@@ -29,12 +33,18 @@ export const PlaceOrder = () => {
       size: product.size,
     }))
 
-    console.log('👽 ~ PlaceOrder ~ address:', { address, productsToOrder })
+    // Server Action
     const res = await placeOrder(productsToOrder, address)
 
-    console.log('👽 ~ onPlaceOrder ~ res:', { res })
+    if (!res.ok) {
+      setIsPlacingOrder(false)
+      setErrorMessage(res.message)
+      return
+    }
 
-    setIsPlacingOrder(false)
+    //* Todo salio bien
+    clearCart()
+    router.replace(`/orders/${res.order?.id}`)
   }
 
   if (!loaded) return <p>Cargando...</p>
@@ -91,7 +101,7 @@ export const PlaceOrder = () => {
           </span>
         </p>
 
-        {/* <p className='text-red-500'>Error de creación</p> */}
+        <p className='text-red-500'>{errorMessage}</p>
 
         <button
           className={clsx({
