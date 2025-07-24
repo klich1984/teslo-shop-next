@@ -80,7 +80,7 @@ export default async function OrderPage({ params }: OrderPageProps) {
           </div>
 
           {/* checkout | Resumen de la compra */}
-          <div className='bg-white rounded-xl shadow-xl p-7'>
+          <div className='bg-white h-fit rounded-xl shadow-xl p-7'>
             <h2 className='text-2xl mb-2 font-bold'>Direccion de entrega</h2>
             <div className='mb-10'>
               <p className='text-xl'>
