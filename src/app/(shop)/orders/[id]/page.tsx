@@ -1,4 +1,4 @@
-import { Title } from '@/components'
+import { PayPalButton, Title } from '@/components'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { IoCardOutline } from 'react-icons/io5'
@@ -121,7 +121,8 @@ export default async function OrderPage({ params }: OrderPageProps) {
             </div>
 
             <div className='mt-5 mb-2 w-full'>
-              <div
+              <PayPalButton />
+              {/* <div
                 className={clsx(
                   'flex items-center rounded-lg py-2 px-3.5 text-xs font-bold text-white mb-5',
                   {
@@ -131,11 +132,10 @@ export default async function OrderPage({ params }: OrderPageProps) {
                 )}
               >
                 <IoCardOutline size={30} />
-                {/* <span className='mx-2'>Pendiente de pago</span> */}
                 <span className='mx-2'>
                   {order.order!.isPaid ? 'Orden pagada' : 'Pendiente de pago'}
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
