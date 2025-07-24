@@ -2,7 +2,7 @@ import { Title } from '@/components'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { IoCardOutline } from 'react-icons/io5'
-import { getOrderById } from '@/actions/order/get-order-by-is'
+import { getOrderById } from '@/actions/order/get-order-by-id'
 import { redirect } from 'next/navigation'
 import { currencyFormat } from '@/utils'
 interface OrderPageProps {
