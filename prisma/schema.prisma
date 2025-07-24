@@ -127,6 +127,8 @@ model Order {
   userId       String
   OrderItem    OrderItem[]
   OrderAddress OrderAddress?
+
+  transactionId String? // Identificador de la transacción de pago
 }
 
 model OrderItem {
