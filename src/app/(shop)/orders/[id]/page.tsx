@@ -2,7 +2,8 @@ import { Title } from '@/components'
 import Image from 'next/image'
 import clsx from 'clsx'
 import { IoCardOutline } from 'react-icons/io5'
-import { getOrderById } from '@/actions/order/get-order-by-id'
+
+import { getOrderById } from '@/actions'
 import { redirect } from 'next/navigation'
 import { currencyFormat } from '@/utils'
 interface OrderPageProps {
@@ -131,7 +132,9 @@ export default async function OrderPage({ params }: OrderPageProps) {
               >
                 <IoCardOutline size={30} />
                 {/* <span className='mx-2'>Pendiente de pago</span> */}
-                <span className='mx-2'>{order.order!.isPaid ? 'Orden pagada' : 'Pendiente de pago'}</span>
+                <span className='mx-2'>
+                  {order.order!.isPaid ? 'Orden pagada' : 'Pendiente de pago'}
+                </span>
               </div>
             </div>
           </div>
