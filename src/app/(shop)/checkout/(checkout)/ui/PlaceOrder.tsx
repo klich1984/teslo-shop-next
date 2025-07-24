@@ -22,6 +22,17 @@ export const PlaceOrder = () => {
 
   const { address } = useAddressStore()
 
+  const newAddress = {
+    firstName: address.firstName,
+    lastName: address.lastName,
+    address: address.address,
+    address2: address.address2,
+    postalCode: address.postalCode,
+    city: address.city,
+    country: address.country,
+    phone: address.phone,
+  }
+
   const { cart, getSummaryInformation, clearCart } = useCartStore()
 
   const { itemsInCart, subTotal, tax, total } = getSummaryInformation()
@@ -35,8 +46,11 @@ export const PlaceOrder = () => {
       size: product.size,
     }))
 
+    console.log('👽 ~ onPlaceOrder ~ productsToOrder:', { newAddress, address })
     // Server Action
-    const res = await placeOrder(productsToOrder, address)
+    const res = await placeOrder(productsToOrder, newAddress)
+
+
 
     if (!res.ok) {
       setIsPlacingOrder(false)
