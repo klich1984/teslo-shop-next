@@ -1,6 +1,7 @@
 'use server'
 
 import { PayPalOrderStatusResponse } from '@/interfaces'
+import { prisma } from '@/lib/prisma'
 
 const getPayPalBearerToken = async (): Promise<string | null> => {
   const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
@@ -27,7 +28,7 @@ const getPayPalBearerToken = async (): Promise<string | null> => {
   }
 
   try {
-    const result = await fetch(oauth2URL, requestOptions)
+    const result = await fetch(oauth2URL, { ...requestOptions, cache: 'no-store' })
     const resJson = await result.json()
 
     return resJson.access_token
@@ -53,7 +54,7 @@ const verifyPayPalPayment = async (
   }
 
   try {
-    const response = await fetch(paypalOrderURL, requestOptions)
+    const response = await fetch(paypalOrderURL, { ...requestOptions, cache: 'no-store' })
     const result = await response.json()
 
     return result
@@ -79,20 +80,38 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
   if (!response) {
     return {
       ok: false,
-      message: 'Error al verificar el pago de PayPal'
+      message: 'Error al verificar el pago de PayPal',
     }
   }
 
   const { status, purchase_units } = response
   // const {} = purchase_units[0] // TODO: invoice Id
-  console.log('👽 ~ paypalCheckPayment ~ status:', {status, purchase_units})
+  console.log('👽 ~ paypalCheckPayment ~ status:', { status, purchase_units })
   if (status !== 'COMPLETED') {
-    return{
+    return {
       ok: false,
-      message: 'Aun no se ha completado el pago en PayPal'
+      message: 'Aun no se ha completado el pago en PayPal',
     }
   }
 
   // TODO: Realizar la actualixzación en la base de datos.
+  try {
+    await prisma.order.update({
+      where: { id: '7d4d4e25-2309-478c-9989-7133758dc31b' },
+      data: {
+        isPaid: true,
+        paidAt: new Date(),
+        updatedAt: new Date(),
+      },
+    })
 
+    // TODO: revalidar un path
+  } catch (error) {
+    console.log('👽 ~ paypalCheckPayment ~ error:', error)
+
+    return {
+      ok: false,
+      message: '500 - El pago no se pudo realizar',
+    }
+  }
 }
