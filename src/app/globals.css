@@ -68,3 +68,9 @@ body {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
 }
+
+.container__buttons-paypal {
+  .paypal-buttons {
+    z-index: 1;
+  }
+}
