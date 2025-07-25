@@ -3,8 +3,8 @@
 import React from 'react'
 
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
-import { CreateOrderActions, CreateOrderData } from '@paypal/paypal-js'
-import { setTransactionId } from '@/actions'
+import { CreateOrderActions, CreateOrderData, OnApproveActions, OnApproveData } from '@paypal/paypal-js'
+import { paypalCheckPayment, setTransactionId } from '@/actions'
 
 interface PayPalButtonProps {
   orderId: string
@@ -48,9 +48,16 @@ export const PayPalButton = ({ amount, orderId }: PayPalButtonProps) => {
       throw new Error('No se pudo actualizar la orden')
     }
 
-    console.log('👽 TransactionId', {transactionId})
-
     return transactionId
   }
-  return <PayPalButtons createOrder={createOrder} />
+
+  const onAppove = async (data: OnApproveData, actions: OnApproveActions) => {
+    const details = await actions.order?.capture()
+
+    if (!details || !details.id) return
+
+    await paypalCheckPayment(details.id)  // details.id es el transactionId
+  }
+
+  return <PayPalButtons createOrder={createOrder} onApprove={onAppove} />
 }
