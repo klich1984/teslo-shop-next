@@ -20,4 +20,5 @@ export * from './products/get-product-by-slug'
 export * from './products/get-product-by-slug'
 export * from './products/product-pagination'
 
+export * from './user/change-users-role'
 export * from './user/get-paginated-users'

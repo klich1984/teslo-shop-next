@@ -1,5 +1,6 @@
 'use client'
 
+import { changeUsersRole } from '@/actions'
 import type { User } from '@/interfaces'
 import React from 'react'
 
@@ -48,7 +49,7 @@ export const UsersTable = ({ users }: UsersTableProps) => {
               <select
                 className='text-sm w-full p-2 text-gray-900'
                 value={user.role}
-                onChange={(e) => console.log('👽 value', e.target.value)}
+                onChange={(e) => changeUsersRole(user.id, e.target.value)}
               >
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
