@@ -14,6 +14,10 @@
   @apply bg-gray-600 text-white py-2 px-4 rounded transition-all;
 }
 
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-700 text-white py-2 px-4 transition-all cursor-pointer;
+}
+
 :root {
   --primary: #274494;
   --foreground-rgb: 0, 0, 0;
