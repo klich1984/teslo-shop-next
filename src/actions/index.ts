@@ -18,6 +18,7 @@ export * from './order/get-orders-by-user'
 export * from './payments/paypal-check-payment'
 export * from './payments/set-transaction-id'
 
+export * from './products/create-uspdate-product'
 export * from './products/get-product-by-slug'
 export * from './products/get-product-by-slug'
 export * from './products/product-pagination'
