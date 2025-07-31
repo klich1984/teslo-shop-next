@@ -76,7 +76,11 @@ export const createUpdateProduct = async (formData: FormData) => {
         })
       }
 
-      console.log('👽 ProductUpdate', productUpdate)
+      // Proceso de carga y guardado de imagenes
+      // Recorrer las imagenes y guardarlas
+      if (formData.getAll('images')) {
+        console.log('👽 images', formData.getAll('images'))
+      }
 
       return { productUpdate }
     })
