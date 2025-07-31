@@ -4,6 +4,7 @@ import { createUpdateProduct } from '@/actions'
 import { Category, Product, ProductImage } from '@/interfaces'
 import clsx from 'clsx'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 
 interface Props {
@@ -29,10 +30,12 @@ interface FormInputs {
 }
 
 export const ProductForm = ({ product, categories = [] }: Props) => {
+  const router = useRouter()
+
   const {
     handleSubmit,
     register,
-    formState: { isValid },
+    // formState: { isValid },
     getValues,
     setValue,
     watch,
@@ -58,9 +61,6 @@ export const ProductForm = ({ product, categories = [] }: Props) => {
     }
 
     setValue('sizes', Array.from(sizes))
-
-    console.log('👽 ~ onSizeChanged ~ sizes:', sizes)
-
   }
 
   const onSubmit = async (data: FormInputs) => {
@@ -81,7 +81,14 @@ export const ProductForm = ({ product, categories = [] }: Props) => {
     formData.append('categoryId', productToSave.categoryId)
     formData.append('gender', productToSave.gender)
 
-    const { ok } = await createUpdateProduct(formData)
+    const { ok, productUpdate } = await createUpdateProduct(formData)
+
+    if (!ok) {
+      alert('Producto no actualizado')
+      return
+    }
+
+    router.replace(`/admin/product/${productUpdate?.slug}`)
 
     console.log('👽 ~ ProductForm ~ ok:', ok)
   }
