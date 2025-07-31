@@ -59,12 +59,24 @@ export const createUpdateProduct = async (formData: FormData) => {
         }
       })
 
-      console.log('👽 ProductUpdate', productUpdate)
     } else {
       // crear
+      productUpdate = await tx.product.create({
+        data: {
+          ...rest,
+          sizes: {
+            set: rest.sizes as Size[],
+          },
+          tags: {
+            set: tagsArray,
+          }
+        }
+      })
     }
 
-    return {}
+    console.log('👽 ProductUpdate', productUpdate)
+
+    return { productUpdate }
   })
 
   // Todo: revalidate path
