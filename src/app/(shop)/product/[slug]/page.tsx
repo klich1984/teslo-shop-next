@@ -39,6 +39,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound()
   }
 
+  if (product.images.length === 0)
+    return (
+      <div className='mt-5 mb-20 flex items-center justify-center text-3xl'>
+        El producto no esta disponible por falta de imagen
+      </div>
+    )
+
   return (
     <div className='mt-5 mb-20 grid md:grid-cols-3 gap-3'>
       {/* Slideshow */}
