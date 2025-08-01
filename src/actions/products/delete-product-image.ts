@@ -38,7 +38,7 @@ export const deleteProductImage = async (imageId: number, imageUrl: string) => {
     revalidatePath(`/product/${deletedImage.product.slug}`)
 
   } catch (error) {
-    console.log('👽 ~ deleteProductImage ~ error:', error)
+    console.error('👽 ~ deleteProductImage ~ error:', error)
 
     return {
       ok: false,

@@ -28,7 +28,7 @@ export const changeUsersRole = async (userId: string, role: string) => {
       ok: true,
     }
   } catch (error) {
-    console.log('👽 ~ changeUsersRole ~ error:', error)
+    console.error('👽 ~ changeUsersRole ~ error:', error)
 
     return {
       ok: false,

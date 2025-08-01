@@ -2,18 +2,15 @@
 import React, { useActionState, useEffect } from 'react'
 
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { authenticate } from '@/actions'
 import { IoInformationCircleOutline } from 'react-icons/io5'
 import clsx from 'clsx'
 
 export const LoginForm = () => {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
   const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined)
 
-  console.log('13👽 useActionState', { isPending, errorMessage, formAction, callbackUrl })
   useEffect(() => {
     // redireccionar
     if (

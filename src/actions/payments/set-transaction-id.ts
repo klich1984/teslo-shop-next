@@ -24,8 +24,7 @@ export const setTransactionId = async (orderId: string, transactionId: string) =
       ok: true,
     }
   } catch (error) {
-
-    console.log('👽 ~ setTransactionId ~ error:', error)
+    console.error('👽 ~ setTransactionId ~ error:', error)
 
     return {
       ok: false,

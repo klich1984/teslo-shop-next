@@ -16,7 +16,7 @@ export const deleteUserAddress = async (userId: string) => {
       message: 'Direccion eliminada con exito',
     }
   } catch (error) {
-    console.log('👽 ~ deleteUserAddress ~ error:', error)
+    console.error('👽 ~ deleteUserAddress ~ error:', error)
 
     return {
       ok: false,

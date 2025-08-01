@@ -80,9 +80,6 @@ export const ProductForm = ({ product, categories = [] }: Props) => {
     formData.append('categoryId', productToSave.categoryId)
     formData.append('gender', productToSave.gender)
 
-
-    console.log('👽 ~ onSubmit ~ images:', images)
-
     if (images) {
       for (let i = 0; i < images.length; i++) {
         formData.append('images', images[i])
@@ -97,8 +94,6 @@ export const ProductForm = ({ product, categories = [] }: Props) => {
     }
 
     router.replace(`/admin/product/${productUpdate?.slug}`)
-
-    console.log('👽 ~ ProductForm ~ ok:', ok)
   }
 
 

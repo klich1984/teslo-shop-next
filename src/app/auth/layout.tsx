@@ -4,7 +4,6 @@ import { redirect } from 'next/navigation'
 export default async function ShopLayout({ children }: { children: React.ReactNode }) {
   const session = await auth()
 
-  // console.log('👽 ~ ShopLayout ~ session:', session)
   if (session?.user) {
     redirect('/')
   }

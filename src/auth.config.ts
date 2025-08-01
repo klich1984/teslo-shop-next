@@ -10,17 +10,7 @@ export const authConfig: NextAuthConfig = {
     newUser: '/auth/new-account',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      console.log('👽 ~ authorized ~ auth:', auth, nextUrl)
-
-      // const isLoggedIn = !!auth?.user;
-      // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      // if (isOnDashboard) {
-      //   if (isLoggedIn) return true;
-      //   return false; // Redirect unauthenticated users to login page
-      // } else if (isLoggedIn) {
-      //   return Response.redirect(new URL('/dashboard', nextUrl));
-      // }
+    authorized() {
       return true
     },
 
@@ -33,7 +23,6 @@ export const authConfig: NextAuthConfig = {
     },
 
     session({ session, token }) {
-      console.log('👽 ~ session ~ session:', { session, token })
       session.user = token.data as never
 
       return session
@@ -64,8 +53,6 @@ export const authConfig: NextAuthConfig = {
         // regresar el usuario
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user // Se saca el pasword para no ser enviado.
-
-        // console.log('👽 ~ authorize ~ rest:', rest)
 
         return rest
       },

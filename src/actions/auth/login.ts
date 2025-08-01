@@ -30,7 +30,7 @@ export const login = async (email: string, password: string) => {
       ok: true,
     }
   } catch (error) {
-    console.log('👽 ~ login ~ error:', error)
+    console.error('👽 ~ login ~ error:', error)
     return { ok: false, message: 'No se pudo iniciar sesion' }
   }
 }

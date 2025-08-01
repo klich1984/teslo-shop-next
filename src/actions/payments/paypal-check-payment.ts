@@ -34,7 +34,7 @@ const getPayPalBearerToken = async (): Promise<string | null> => {
 
     return resJson.access_token
   } catch (error) {
-    console.log('👽 ~ getPayPalBearerToken ~ error:', error)
+    console.error('👽 ~ getPayPalBearerToken ~ error:', error)
 
     return null
   }
@@ -60,7 +60,7 @@ const verifyPayPalPayment = async (
 
     return result
   } catch (error) {
-    console.log('👽 ~ verifyPayPalPayment ~ error:', error)
+    console.error('👽 ~ verifyPayPalPayment ~ error:', error)
 
     return null
   }
@@ -87,7 +87,7 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
 
   const { status, purchase_units } = response
   const { invoice_id: orderId } = purchase_units[0]
-  console.log('👽 ~ paypalCheckPayment ~ status:', { status, purchase_units })
+
   if (status !== 'COMPLETED') {
     return {
       ok: false,
@@ -111,7 +111,7 @@ export const paypalCheckPayment = async (paypalTransactionId: string) => {
       ok: true,
     }
   } catch (error) {
-    console.log('👽 ~ paypalCheckPayment ~ error:', error)
+    console.error('👽 ~ paypalCheckPayment ~ error:', error)
 
     return {
       ok: false,

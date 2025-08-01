@@ -90,7 +90,7 @@ const main = async () => {
     data: countries,
   })
 
-  console.log('👽 Seed ejecutandose correctamente')
+  console.info('👽 Seed ejecutandose correctamente')
 }
 
 ;(() => {

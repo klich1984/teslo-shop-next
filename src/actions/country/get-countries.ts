@@ -12,7 +12,7 @@ export const getCountries = async () => {
 
     return countries
   } catch (error) {
-    console.log('👽 ~ getCountries ~ error:', error)
+    console.error('👽 ~ getCountries ~ error:', error)
 
     return []
   }

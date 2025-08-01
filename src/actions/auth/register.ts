@@ -24,7 +24,7 @@ export const registerUser = async (name: string, email: string, password: string
       message: 'Usuario creado con exito',
     }
   } catch (error) {
-    console.log('👽 ~ registerUser ~ error:', error)
+    console.error('👽 ~ registerUser ~ error:', error)
     return {
       ok: false,
       message: 'No se pudo crear el usuario',

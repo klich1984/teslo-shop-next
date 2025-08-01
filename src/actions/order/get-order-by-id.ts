@@ -75,7 +75,7 @@ export const getOrderById = async (id: string) => {
       order: order,
     }
   } catch (error) {
-    console.log('👽 ~ getOrderById ~ error:', error)
+    console.error('👽 ~ getOrderById ~ error:', error)
 
     return {
       ok: false,

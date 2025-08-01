@@ -44,7 +44,7 @@ const uploadImages = async (images: File[]) => {
 
         // return imageUrl
       } catch (error) {
-        console.log('👽 ~ uploadImages ~ error:', error)
+        console.error('👽 ~ uploadImages ~ error:', error)
 
         return null
       }
@@ -52,11 +52,10 @@ const uploadImages = async (images: File[]) => {
 
     const uploadedImages = await Promise.all(uploadPromises)
 
-    // console.log('👽 ~ uploadImages ~ uploadedImages:', uploadedImages)
 
     return uploadedImages
   } catch (error) {
-    console.log('👽 ~ uploadImages ~ error:', error)
+    console.error('👽 ~ uploadImages ~ error:', error)
 
     return null
   }
@@ -67,7 +66,7 @@ export const createUpdateProduct = async (formData: FormData) => {
   const productParsed = productSchema.safeParse(data)
 
   if (!productParsed.success) {
-    console.log('👽 ~ productParsed error ~ formData:', productParsed.error)
+    console.error('👽 ~ productParsed error ~ formData:', productParsed.error)
     return {
       ok: false,
     }
@@ -144,7 +143,7 @@ export const createUpdateProduct = async (formData: FormData) => {
       productUpdate: prismaTx.productUpdate,
     }
   } catch (error) {
-    console.log('👽 ~ createUpdateProduct ~ error:', error)
+    console.error('👽 ~ createUpdateProduct ~ error:', error)
 
     return {
       ok: false,

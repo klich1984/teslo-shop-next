@@ -46,7 +46,6 @@ export const PlaceOrder = () => {
       size: product.size,
     }))
 
-    console.log('👽 ~ onPlaceOrder ~ productsToOrder:', { newAddress, address })
     // Server Action
     const res = await placeOrder(productsToOrder, newAddress)
 

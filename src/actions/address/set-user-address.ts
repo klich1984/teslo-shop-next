@@ -40,7 +40,7 @@ const createOrReplaceAddress = async (address: Address, userId: string) => {
 
     return updateAddress
   } catch (error) {
-    console.log('👽 ~ createOrReplaceAddress ~ error:', error)
+    console.error('👽 ~ createOrReplaceAddress ~ error:', error)
     throw new Error('No se pudo guardar la dirección en la base de datos')
   }
 }
@@ -55,7 +55,7 @@ export const setUserAddress = async (address: Address, userId: string) => {
       message: 'Direccion guardada correctamente',
     }
   } catch (error) {
-    console.log('👽 ~ setUserAddress ~ error:', error)
+    console.error('👽 ~ setUserAddress ~ error:', error)
     return {
       ok: false,
       message: 'No se pudo grabar la dirección',

@@ -17,7 +17,7 @@ export const getUserAddress = async (userId: string) => {
       country: countryId,
     }
   } catch (error) {
-    console.log('👽 ~ getUserAddress ~ error:', error)
+    console.error('👽 ~ getUserAddress ~ error:', error)
 
     return null
   }
