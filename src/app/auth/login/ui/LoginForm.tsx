@@ -21,8 +21,7 @@ export const LoginForm = () => {
       return
 
     router.replace('/')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [errorMessage])
+  }, [errorMessage, router])
 
   return (
     <>

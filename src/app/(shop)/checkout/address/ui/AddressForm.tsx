@@ -54,8 +54,7 @@ export const AddressForm = ({ countries, userStoreAddress = {} }: AddressFormPro
     if (address.firstName) {
       reset(address)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [address, reset])
 
   const onSubmit = async (data: FormInputs) => {
     const { rememberAddress, ...rest } = data
